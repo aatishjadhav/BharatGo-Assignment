@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { loginUser } from "../slices/authSlice";
+import { login } from "../slices/authSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -14,9 +14,9 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(loginUser({ email, password })).unwrap();
+      await dispatch(login({ email, password })).unwrap();
       toast.success("Login successful!");
-      navigate("/user/profile");
+      navigate("/my-account");
     } catch (error) {
       toast.error("Invalid credentials!");
     }
@@ -24,14 +24,14 @@ const Login = () => {
 
   const handleGuestLogin = async () => {
     const guestCredentials = {
-      email: "john@gmail.com",
-      password: "john@123",
+      email: "john@mail.com",
+      password: "changeme",
     };
 
     try {
-      await dispatch(loginUser(guestCredentials)).unwrap();
+      await dispatch(login(guestCredentials)).unwrap();
       toast.success("Logged in as Guest!");
-      navigate("/user/profile");
+      navigate("/");
     } catch (error) {
       toast.error("Guest login failed!");
     }

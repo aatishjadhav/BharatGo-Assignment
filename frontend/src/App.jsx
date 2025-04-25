@@ -29,6 +29,9 @@ import Orders from "./pages/Orders";
 import Header from "./components/Header";
 import Cart from "./pages/Cart";
 import { ToastContainer } from "react-toastify";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -38,6 +41,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/:category" element={<Home />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/my-account" element={<Profile />} />
       </Routes>
 
       <Cart />

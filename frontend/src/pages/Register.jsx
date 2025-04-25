@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { registerUser } from "../slices/authSlice";
+import { signup } from "../slices/authSlice";
 import { toast } from "react-toastify";
 
 const Register = () => {
@@ -11,11 +11,20 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
+  const [avatar, setAvatar] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(registerUser({ name, email, password })).unwrap();
+      console.log({
+        email,
+        password,
+        name,
+        role,
+        avatar
+      });
+      await dispatch(signup({email, password, name, role, avatar }))
       toast.success("Sign Up Successful.");
       navigate("/login");
     } catch (err) {
@@ -69,6 +78,29 @@ const Register = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Role</label>
+            <input
+              type="text"
+              className="form-control rounded-3"
+              placeholder="Enter a role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Avatar</label>
+            <input
+              type="url"
+              className="form-control rounded-3"
+              placeholder="Enter a image url"
+              value={avatar}
+              onChange={(e) => setAvatar(e.target.value)}
+              required
+               pattern="https?://.*"
             />
           </div>
 

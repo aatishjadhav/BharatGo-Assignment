@@ -56,12 +56,12 @@ const Header = () => {
           </ul>
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <Link class="nav-link" aria-disabled="true">
+              <Link class="nav-link" to="/orders">
                 My Orders
               </Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link" aria-disabled="true">
+              <Link class="nav-link" to="/my-account">
                 My Account
               </Link>
             </li>
