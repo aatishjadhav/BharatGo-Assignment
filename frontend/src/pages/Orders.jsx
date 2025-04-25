@@ -16,16 +16,23 @@ const Orders = () => {
 
         <div>
           {orderData?.length > 0 ? (
-            <div>
+            <div className="py-3">
               {orderData?.map((item, index) => (
-                <div key={item.id} className="mb-3 border-bottom pb-2">
-                  <div className="d-flex align-items-center">
+                <div
+                  key={item.id}
+                  className="d-flex justify-content-center card mx-auto p-3"
+                  style={{ width: "30%" }}
+                >
+                  <div
+                    className="d-flex align-items-center justify-content-center"
+                    style={{ width: "100%" }}
+                  >
                     <img
                       src={item.images[0]}
                       alt={item.title}
                       style={{
-                        width: "60px",
-                        height: "60px",
+                        width: "100px",
+                        height: "100px",
                         objectFit: "cover",
                         marginRight: "10px",
                       }}
@@ -33,7 +40,17 @@ const Orders = () => {
                     />
                     <div className="flex-grow-1">
                       <h6 className="mb-0">{item.title}</h6>
-                      <small>${item.price}</small>
+                      <p>${item.price}</p>
+                      <button
+                        className="bg-secondary rounded text-white"
+                        style={{
+                          border: "none",
+                          backgroundColor: "#a8e6a1",
+                          padding: "0px 8px",
+                        }}
+                      >
+                        {item.quantity}
+                      </button>
                     </div>
                   </div>
                 </div>

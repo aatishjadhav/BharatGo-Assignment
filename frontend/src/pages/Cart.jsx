@@ -4,6 +4,7 @@ import {
   clearCart,
   removeFromCart,
   toggleCartOffcanvas,
+  updateQuantity,
 } from "../slices/cartSlice";
 import { toast } from "react-toastify";
 
@@ -16,8 +17,8 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
   const total = cart.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
 
-    const handleCheckout = () => {
-        localStorage.setItem("orderCart", JSON.stringify(cart));
+  const handleCheckout = () => {
+    localStorage.setItem("orderCart", JSON.stringify(cart));
     dispatch(clearCart());
     dispatch(toggleCartOffcanvas());
     navigate("/orders");
@@ -35,7 +36,7 @@ const Cart = () => {
         tabIndex="-1"
         style={{
           visibility: showCartOffcanvas ? "visible" : "hidden",
-          top: "63px",
+          top: "58px",
         }}
       >
         <div className="offcanvas-header">
@@ -60,8 +61,8 @@ const Cart = () => {
                     src={item.images[0]}
                     alt={item.title}
                     style={{
-                      width: "60px",
-                      height: "60px",
+                      width: "80px",
+                      height: "80px",
                       objectFit: "cover",
                       marginRight: "10px",
                     }}
@@ -73,25 +74,10 @@ const Cart = () => {
 
                     <div className="d-flex gap-2">
                       <button
-                        className="bg-success rounded text-white"
-                        style={{ border: "none", backgroundColor: "#a8e6a1" }}
-                        onClick={() =>
-                          dispatch(
-                            updateQuantity({
-                              id: item.id,
-                              quantity: item.quantity + 1,
-                            })
-                          )
-                        }
-                      >
-                        +
-                      </button>
-                      <div>{item.quantity}</div>
-                      <button
                         className="bg-danger rounded text-white"
                         style={{
                           border: "none",
-                          backgroundColor: "#f8b7b7",
+                          backgroundColor: "#a8e6a1",
                           padding: "0px 10px",
                         }}
                         onClick={() =>
@@ -104,6 +90,25 @@ const Cart = () => {
                         }
                       >
                         -
+                      </button>
+                      <div>{item.quantity}</div>
+                      <button
+                        className="bg-success rounded text-white"
+                        style={{
+                          border: "none",
+                          backgroundColor: "#f8b7b7",
+                          padding: "0px 10px",
+                        }}
+                        onClick={() =>
+                          dispatch(
+                            updateQuantity({
+                              id: item.id,
+                              quantity: item.quantity + 1,
+                            })
+                          )
+                        }
+                      >
+                        +
                       </button>
                     </div>
                   </div>

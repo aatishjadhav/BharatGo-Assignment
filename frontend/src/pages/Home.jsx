@@ -5,9 +5,7 @@ import { fetchProducts, fetchByCategory } from "../slices/productsSlice";
 import { useSelector } from "react-redux";
 import {
   addToCart,
-  removeFromCart,
   toggleCartOffcanvas,
-  updateQuantity,
 } from "../slices/cartSlice";
 import { toast } from "react-toastify";
 import Cart from "./Cart";
@@ -23,10 +21,6 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showOffcanvas, setShowOffcanvas] = useState(false);
-
-  const showCartOffcanvas = useSelector(
-    (state) => state.cart.showCartOffcanvas
-  );
 
   const dispatch = useDispatch();
 
@@ -60,8 +54,6 @@ const Home = () => {
     toast.success("Product added to cart.");
     dispatch(toggleCartOffcanvas(true));
   };
-
-  const cart = useSelector((state) => state.cart.cart);
 
   return (
     <>
