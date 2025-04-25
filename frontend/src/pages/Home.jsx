@@ -3,7 +3,12 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchProducts, fetchByCategory } from "../slices/productsSlice";
 import { useSelector } from "react-redux";
-import { addToCart, removeFromCart, toggleCartOffcanvas, updateQuantity } from "../slices/cartSlice";
+import {
+  addToCart,
+  removeFromCart,
+  toggleCartOffcanvas,
+  updateQuantity,
+} from "../slices/cartSlice";
 import { toast } from "react-toastify";
 import Cart from "./Cart";
 
@@ -18,11 +23,13 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showOffcanvas, setShowOffcanvas] = useState(false);
-  // const [showCartOffcanvas, setShowCartOffcanvas] = useState(false);
-  const showCartOffcanvas = useSelector((state) => state.cart.showCartOffcanvas);
+
+  const showCartOffcanvas = useSelector(
+    (state) => state.cart.showCartOffcanvas
+  );
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const { category } = useParams();
   const { products, status, error } = useSelector((state) => state.products);
   console.log("product data", products);
@@ -55,20 +62,9 @@ const Home = () => {
   };
 
   const cart = useSelector((state) => state.cart.cart);
-  console.log("Cart items", cart);
-
-
- 
-
-  const total = cart.reduce((acc, curr) => acc + curr.price * curr.quantity, 0);
-
-  const handleCheckout = () => {
-    navigate("/orders");
-  }
 
   return (
     <>
-     
       <div className="container">
         <div className="text-center py-5">
           <p>Home</p>
@@ -168,112 +164,8 @@ const Home = () => {
             )}
           </div>
         </div>
-        {/* <div
-          className={`offcanvas offcanvas-end ${showCartOffcanvas ? "show" : ""}`}
-          tabIndex="-1"
-          style={{
-            visibility: showCartOffcanvas ? "visible" : "hidden",
-            top: "63px",
-          }}
-        >
-          <div className="offcanvas-header">
-            <h5 className="offcanvas-title">Cart</h5>
-            <button
-              type="button"
-              className="btn-close text-reset"
-              onClick={() => dispatch(toggleCartOffcanvas())}
-            ></button>
-          </div>
-          <div
-            className="offcanvas-body"
-            style={{ overflowY: "auto", paddingBottom: "60px" }}
-          >
-            {cart.length === 0 ? (
-              <p>Your cart is empty.</p>
-            ) : (
-              cart.map((item) => (
-                <div key={item._id} className="mb-3 border-bottom pb-2">
-                  <div className="d-flex align-items-center">
-                    <img
-                      src={item.images[0]}
-                      alt={item.title}
-                      style={{
-                        width: "60px",
-                        height: "60px",
-                        objectFit: "cover",
-                        marginRight: "10px",
-                      }}
-                      className="rounded"
-                    />
-                    <div className="flex-grow-1">
-                      <h6 className="mb-0">{item.title}</h6>
-                      <small>${item.price}</small>
 
-                      <div className="d-flex gap-2">
-                        <button
-                          className="bg-success rounded text-white"
-                          style={{ border: "none", backgroundColor: "#a8e6a1" }}
-                          onClick={() =>
-                            dispatch(
-                              updateQuantity({
-                                id: item.id,
-                                quantity: item.quantity + 1,
-                              })
-                            )
-                          }
-                        >
-                          +
-                        </button>
-                        <div>{item.quantity}</div>
-                        <button
-                          className="bg-danger rounded text-white"
-                          style={{
-                            border: "none",
-                            backgroundColor: "#f8b7b7",
-                            padding: "0px 10px",
-                          }}
-                          onClick={() =>
-                            dispatch(
-                              updateQuantity({
-                                id: item.id,
-                                quantity: item.quantity - 1,
-                              })
-                            )
-                          }
-                        >
-                          -
-                        </button>
-                      </div>
-                    </div>
-
-                    <button
-                      className="btn btn-close"
-                      onClick={() => handleRemoveFromCart(item.id)}
-                    >
-                      ×
-                    </button>
-                  </div>
-                </div>
-              ))
-            )}
-            <div
-              style={{
-                position: "absolute",
-                bottom: "0",
-                left: "0",
-                right: "0",
-                padding: "10px",
-                backgroundColor: "#fff",
-                borderTop: "1px solid #ccc",
-              }}
-            >
-              <strong>Total:</strong>
-              <strong className="float-end"> ${total}</strong>
-              <button className="btn btn-dark d-block w-100" onClick={handleCheckout}>Checkout</button>
-            </div>
-          </div>
-        </div> */}
-        <Cart/>
+        <Cart />
       </div>
     </>
   );

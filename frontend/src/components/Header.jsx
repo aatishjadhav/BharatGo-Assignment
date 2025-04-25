@@ -12,9 +12,9 @@ const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary px-4 sticky-top shadow-sm">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <Link class="navbar-brand" to="/">
           Shopi
-        </a>
+        </Link>
         <button
           class="navbar-toggler"
           type="button"
